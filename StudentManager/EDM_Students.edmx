@@ -1,0 +1,1567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BAS_StudentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AttendedColleges">
+          <Key>
+            <PropertyRef Name="CollegeID" />
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="CollegeID" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="CurrentlyAttending" Type="bit" Nullable="false" />
+          <Property Name="LastYearAttended" Type="int" Nullable="false" />
+          <Property Name="GPA" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BAS_StatusLookup">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="StatusType" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Colleges">
+          <Key>
+            <PropertyRef Name="CollegeID" />
+          </Key>
+          <Property Name="CollegeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CollegeName" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="CourseEnrollment">
+          <Key>
+            <PropertyRef Name="EnrollmentID" />
+          </Key>
+          <Property Name="EnrollmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+          <Property Name="EnrollmentStatus" Type="int" Nullable="false" />
+          <Property Name="EnrollmentDate" Type="date" Nullable="false" />
+          <Property Name="CompletionDate" Type="date" />
+          <Property Name="ConditionalAdmission" Type="bit" Nullable="false" />
+          <Property Name="TransferEquivalent" Type="bit" Nullable="false" />
+          <Property Name="Notes" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseNumber" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CourseItemNumber" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CourseName" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="CourseTypeID" Type="int" Nullable="false" />
+          <Property Name="CourseDescription" Type="varchar" MaxLength="2000" />
+          <Property Name="Credits" Type="int" Nullable="false" />
+          <Property Name="RequiredForBASAdmission" Type="bit" Nullable="false" />
+          <Property Name="RequiredForBASCompletion" Type="bit" Nullable="false" />
+          <Property Name="CreditSection" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseTypeLookUp">
+          <Key>
+            <PropertyRef Name="CourseTypeID" />
+          </Key>
+          <Property Name="CourseTypeID" Type="int" Nullable="false" />
+          <Property Name="CourseType" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CreditSectionLookUp">
+          <Key>
+            <PropertyRef Name="CreditSectionID" />
+          </Key>
+          <Property Name="CreditSectionID" Type="int" Nullable="false" />
+          <Property Name="CreditSection" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EduBackgroundLookup">
+          <Key>
+            <PropertyRef Name="EduID" />
+          </Key>
+          <Property Name="EduID" Type="int" Nullable="false" />
+          <Property Name="EduBackground" Type="varchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employers">
+          <Key>
+            <PropertyRef Name="EmployerID" />
+          </Key>
+          <Property Name="EmployerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployerName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EmploymentStatus">
+          <Key>
+            <PropertyRef Name="EmploymentStatusID" />
+          </Key>
+          <Property Name="EmploymentStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployerID" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="JobTitleID" Type="int" Nullable="false" />
+          <Property Name="StatusChangedDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmploymentStatusLookUp">
+          <Key>
+            <PropertyRef Name="EmploymentStatusID" />
+          </Key>
+          <Property Name="EmploymentStatusID" Type="int" Nullable="false" />
+          <Property Name="EmploymentStatus" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="EnrollmentStatusLookUp">
+          <Key>
+            <PropertyRef Name="EnrollmentStatusID" />
+          </Key>
+          <Property Name="EnrollmentStatusID" Type="int" Nullable="false" />
+          <Property Name="EnrollmentStatus" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobTitleLookUp">
+          <Key>
+            <PropertyRef Name="JobTitleID" />
+          </Key>
+          <Property Name="JobTitleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobTitle" Type="varchar" MaxLength="55" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PreferredContactLookup">
+          <Key>
+            <PropertyRef Name="ContactTypeID" />
+          </Key>
+          <Property Name="ContactTypeID" Type="int" Nullable="false" />
+          <Property Name="ContactMethod" Type="varchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReferralTypeLookup">
+          <Key>
+            <PropertyRef Name="ReferralID" />
+          </Key>
+          <Property Name="ReferralID" Type="int" Nullable="false" />
+          <Property Name="ReferralType" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentDetails">
+          <Key>
+            <PropertyRef Name="DetailID" />
+          </Key>
+          <Property Name="DetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="EduBackground" Type="int" Nullable="false" />
+          <Property Name="ReferralType" Type="int" Nullable="false" />
+          <Property Name="PreferredContactMethod" Type="int" Nullable="false" />
+          <Property Name="AttendedInfoSession" Type="bit" Nullable="false" />
+          <Property Name="RunningStartParticipant" Type="bit" Nullable="false" />
+          <Property Name="BAS_Status" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="date" Nullable="false" />
+          <Property Name="Notes" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RTCStudentID" Type="varchar" MaxLength="10" />
+          <Property Name="FirstName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
+          <Property Name="StudentEmail" Type="varchar" MaxLength="30" />
+          <Property Name="PersonalEmail" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="20" />
+          <Property Name="State" Type="varchar" MaxLength="2" />
+          <Property Name="Zip" Type="varchar" MaxLength="5" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="Gender" Type="bit" Nullable="false" />
+          <Property Name="Notes" Type="varchar" MaxLength="1000" />
+          <Property Name="StudentDocumentsLocation" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="TechInterests">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="DatabaseDevelopment" Type="bit" />
+          <Property Name="SoftwareDevelopment" Type="bit" />
+          <Property Name="WebDevelopment" Type="bit" />
+          <Property Name="MobileDevelopment" Type="bit" />
+          <Property Name="DatabaseAnalysis" Type="bit" />
+          <Property Name="SoftwareAnalysis" Type="bit" />
+          <Property Name="InterfaceDesign" Type="bit" />
+        </EntityType>
+        <Association Name="FK_AttendedColleges_Colleges">
+          <End Role="Colleges" Type="Self.Colleges" Multiplicity="1" />
+          <End Role="AttendedColleges" Type="Self.AttendedColleges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colleges">
+              <PropertyRef Name="CollegeID" />
+            </Principal>
+            <Dependent Role="AttendedColleges">
+              <PropertyRef Name="CollegeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendedColleges_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="AttendedColleges" Type="Self.AttendedColleges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="AttendedColleges">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseEnrollment_Courses">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="CourseEnrollment" Type="Self.CourseEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="CourseEnrollment">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseEnrollment_EnrollmentStatusLU">
+          <End Role="EnrollmentStatusLookUp" Type="Self.EnrollmentStatusLookUp" Multiplicity="1" />
+          <End Role="CourseEnrollment" Type="Self.CourseEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnrollmentStatusLookUp">
+              <PropertyRef Name="EnrollmentStatusID" />
+            </Principal>
+            <Dependent Role="CourseEnrollment">
+              <PropertyRef Name="EnrollmentStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseEnrollment_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="CourseEnrollment" Type="Self.CourseEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="CourseEnrollment">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_CourseTypeLU">
+          <End Role="CourseTypeLookUp" Type="Self.CourseTypeLookUp" Multiplicity="1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseTypeLookUp">
+              <PropertyRef Name="CourseTypeID" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="CourseTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_CreditSectionLU">
+          <End Role="CreditSectionLookUp" Type="Self.CreditSectionLookUp" Multiplicity="1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditSectionLookUp">
+              <PropertyRef Name="CreditSectionID" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="CreditSection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmploymentStatus_Employers">
+          <End Role="Employers" Type="Self.Employers" Multiplicity="1" />
+          <End Role="EmploymentStatus" Type="Self.EmploymentStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employers">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="EmploymentStatus">
+              <PropertyRef Name="EmployerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmploymentStatus_EmploymentStatusLU">
+          <End Role="EmploymentStatusLookUp" Type="Self.EmploymentStatusLookUp" Multiplicity="1" />
+          <End Role="EmploymentStatus" Type="Self.EmploymentStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmploymentStatusLookUp">
+              <PropertyRef Name="EmploymentStatusID" />
+            </Principal>
+            <Dependent Role="EmploymentStatus">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmploymentStatus_JobTitleLU">
+          <End Role="JobTitleLookUp" Type="Self.JobTitleLookUp" Multiplicity="1" />
+          <End Role="EmploymentStatus" Type="Self.EmploymentStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitleLookUp">
+              <PropertyRef Name="JobTitleID" />
+            </Principal>
+            <Dependent Role="EmploymentStatus">
+              <PropertyRef Name="JobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmploymentStatus_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="EmploymentStatus" Type="Self.EmploymentStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="EmploymentStatus">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDetails_BAS_StatusLU">
+          <End Role="BAS_StatusLookup" Type="Self.BAS_StatusLookup" Multiplicity="1" />
+          <End Role="StudentDetails" Type="Self.StudentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAS_StatusLookup">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="StudentDetails">
+              <PropertyRef Name="BAS_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDetails_EduBackgroundLU">
+          <End Role="EduBackgroundLookup" Type="Self.EduBackgroundLookup" Multiplicity="1" />
+          <End Role="StudentDetails" Type="Self.StudentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EduBackgroundLookup">
+              <PropertyRef Name="EduID" />
+            </Principal>
+            <Dependent Role="StudentDetails">
+              <PropertyRef Name="EduBackground" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDetails_PreferredContactLU">
+          <End Role="PreferredContactLookup" Type="Self.PreferredContactLookup" Multiplicity="1" />
+          <End Role="StudentDetails" Type="Self.StudentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PreferredContactLookup">
+              <PropertyRef Name="ContactTypeID" />
+            </Principal>
+            <Dependent Role="StudentDetails">
+              <PropertyRef Name="PreferredContactMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDetails_ReferralTypeLU">
+          <End Role="ReferralTypeLookup" Type="Self.ReferralTypeLookup" Multiplicity="1" />
+          <End Role="StudentDetails" Type="Self.StudentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReferralTypeLookup">
+              <PropertyRef Name="ReferralID" />
+            </Principal>
+            <Dependent Role="StudentDetails">
+              <PropertyRef Name="ReferralType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDetails_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="StudentDetails" Type="Self.StudentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentDetails">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechInterests_Students">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="TechInterests" Type="Self.TechInterests" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="TechInterests">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CheckForDuplicateCourseNumberOrItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CourseNumber" Type="varchar" Mode="In" />
+          <Parameter Name="CourseItemNumber" Type="varchar" Mode="In" />
+          <Parameter Name="RowCount" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="DeleteCollegeWithID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CollegeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteCourseWithID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CourseID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteEmployerWithID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployerID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteJobTitleWithID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="JobTitleID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetBASGraduates" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="YearStart" Type="int" Mode="In" />
+          <Parameter Name="YearEnd" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetLastUpdatedStudentDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetStudentByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="studentID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetStudentDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetStudentEnrollmentData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="StudentsWhoHaveCompletedClass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="courseID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="StudentsWhoNeedToCompleteClass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="courseID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="StudentsWithPreReqsLeft" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="TimesEnrolledInOrCompletedCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentID" Type="int" Mode="In" />
+          <Parameter Name="CourseID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="BAS_StudentsModelStoreContainer">
+          <EntitySet Name="AttendedColleges" EntityType="Self.AttendedColleges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BAS_StatusLookup" EntityType="Self.BAS_StatusLookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Colleges" EntityType="Self.Colleges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseEnrollment" EntityType="Self.CourseEnrollment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseTypeLookUp" EntityType="Self.CourseTypeLookUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CreditSectionLookUp" EntityType="Self.CreditSectionLookUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EduBackgroundLookup" EntityType="Self.EduBackgroundLookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employers" EntityType="Self.Employers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmploymentStatus" EntityType="Self.EmploymentStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmploymentStatusLookUp" EntityType="Self.EmploymentStatusLookUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EnrollmentStatusLookUp" EntityType="Self.EnrollmentStatusLookUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobTitleLookUp" EntityType="Self.JobTitleLookUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PreferredContactLookup" EntityType="Self.PreferredContactLookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReferralTypeLookup" EntityType="Self.ReferralTypeLookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentDetails" EntityType="Self.StudentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TechInterests" EntityType="Self.TechInterests" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AttendedColleges_Colleges" Association="Self.FK_AttendedColleges_Colleges">
+            <End Role="Colleges" EntitySet="Colleges" />
+            <End Role="AttendedColleges" EntitySet="AttendedColleges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendedColleges_Students" Association="Self.FK_AttendedColleges_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="AttendedColleges" EntitySet="AttendedColleges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseEnrollment_Courses" Association="Self.FK_CourseEnrollment_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="CourseEnrollment" EntitySet="CourseEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseEnrollment_EnrollmentStatusLU" Association="Self.FK_CourseEnrollment_EnrollmentStatusLU">
+            <End Role="EnrollmentStatusLookUp" EntitySet="EnrollmentStatusLookUp" />
+            <End Role="CourseEnrollment" EntitySet="CourseEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseEnrollment_Students" Association="Self.FK_CourseEnrollment_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="CourseEnrollment" EntitySet="CourseEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_CourseTypeLU" Association="Self.FK_Courses_CourseTypeLU">
+            <End Role="CourseTypeLookUp" EntitySet="CourseTypeLookUp" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_CreditSectionLU" Association="Self.FK_Courses_CreditSectionLU">
+            <End Role="CreditSectionLookUp" EntitySet="CreditSectionLookUp" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmploymentStatus_Employers" Association="Self.FK_EmploymentStatus_Employers">
+            <End Role="Employers" EntitySet="Employers" />
+            <End Role="EmploymentStatus" EntitySet="EmploymentStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmploymentStatus_EmploymentStatusLU" Association="Self.FK_EmploymentStatus_EmploymentStatusLU">
+            <End Role="EmploymentStatusLookUp" EntitySet="EmploymentStatusLookUp" />
+            <End Role="EmploymentStatus" EntitySet="EmploymentStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmploymentStatus_JobTitleLU" Association="Self.FK_EmploymentStatus_JobTitleLU">
+            <End Role="JobTitleLookUp" EntitySet="JobTitleLookUp" />
+            <End Role="EmploymentStatus" EntitySet="EmploymentStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmploymentStatus_Students" Association="Self.FK_EmploymentStatus_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="EmploymentStatus" EntitySet="EmploymentStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDetails_BAS_StatusLU" Association="Self.FK_StudentDetails_BAS_StatusLU">
+            <End Role="BAS_StatusLookup" EntitySet="BAS_StatusLookup" />
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDetails_EduBackgroundLU" Association="Self.FK_StudentDetails_EduBackgroundLU">
+            <End Role="EduBackgroundLookup" EntitySet="EduBackgroundLookup" />
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDetails_PreferredContactLU" Association="Self.FK_StudentDetails_PreferredContactLU">
+            <End Role="PreferredContactLookup" EntitySet="PreferredContactLookup" />
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDetails_ReferralTypeLU" Association="Self.FK_StudentDetails_ReferralTypeLU">
+            <End Role="ReferralTypeLookup" EntitySet="ReferralTypeLookup" />
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDetails_Students" Association="Self.FK_StudentDetails_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechInterests_Students" Association="Self.FK_TechInterests_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="TechInterests" EntitySet="TechInterests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BAS_StudentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AttendedCollege">
+          <Key>
+            <PropertyRef Name="CollegeID" />
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="CollegeID" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="CurrentlyAttending" Type="Boolean" Nullable="false" />
+          <Property Name="LastYearAttended" Type="Int32" Nullable="false" />
+          <Property Name="GPA" Type="Double" Nullable="false" />
+          <NavigationProperty Name="College" Relationship="Self.FK_AttendedColleges_Colleges" FromRole="AttendedColleges" ToRole="Colleges" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_AttendedColleges_Students" FromRole="AttendedColleges" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="BAS_StatusLookup">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="StatusType" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="StudentDetails" Relationship="Self.FK_StudentDetails_BAS_StatusLU" FromRole="BAS_StatusLookup" ToRole="StudentDetails" />
+        </EntityType>
+        <EntityType Name="College">
+          <Key>
+            <PropertyRef Name="CollegeID" />
+          </Key>
+          <Property Name="CollegeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CollegeName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AttendedColleges" Relationship="Self.FK_AttendedColleges_Colleges" FromRole="Colleges" ToRole="AttendedColleges" />
+        </EntityType>
+        <EntityType Name="CourseEnrollment">
+          <Key>
+            <PropertyRef Name="EnrollmentID" />
+          </Key>
+          <Property Name="EnrollmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <Property Name="EnrollmentStatus" Type="Int32" Nullable="false" />
+          <Property Name="EnrollmentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CompletionDate" Type="DateTime" Precision="0" />
+          <Property Name="ConditionalAdmission" Type="Boolean" Nullable="false" />
+          <Property Name="TransferEquivalent" Type="Boolean" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cours" Relationship="Self.FK_CourseEnrollment_Courses" FromRole="CourseEnrollment" ToRole="Courses" />
+          <NavigationProperty Name="EnrollmentStatusLookUp" Relationship="Self.FK_CourseEnrollment_EnrollmentStatusLU" FromRole="CourseEnrollment" ToRole="EnrollmentStatusLookUp" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_CourseEnrollment_Students" FromRole="CourseEnrollment" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseItemNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseTypeID" Type="Int32" Nullable="false" />
+          <Property Name="CourseDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="Credits" Type="Int32" Nullable="false" />
+          <Property Name="RequiredForBASAdmission" Type="Boolean" Nullable="false" />
+          <Property Name="RequiredForBASCompletion" Type="Boolean" Nullable="false" />
+          <Property Name="CreditSection" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CourseEnrollments" Relationship="Self.FK_CourseEnrollment_Courses" FromRole="Courses" ToRole="CourseEnrollment" />
+          <NavigationProperty Name="CourseTypeLookUp" Relationship="Self.FK_Courses_CourseTypeLU" FromRole="Courses" ToRole="CourseTypeLookUp" />
+          <NavigationProperty Name="CreditSectionLookUp" Relationship="Self.FK_Courses_CreditSectionLU" FromRole="Courses" ToRole="CreditSectionLookUp" />
+        </EntityType>
+        <EntityType Name="CourseTypeLookUp">
+          <Key>
+            <PropertyRef Name="CourseTypeID" />
+          </Key>
+          <Property Name="CourseTypeID" Type="Int32" Nullable="false" />
+          <Property Name="CourseType" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_Courses_CourseTypeLU" FromRole="CourseTypeLookUp" ToRole="Courses" />
+        </EntityType>
+        <EntityType Name="CreditSectionLookUp">
+          <Key>
+            <PropertyRef Name="CreditSectionID" />
+          </Key>
+          <Property Name="CreditSectionID" Type="Int32" Nullable="false" />
+          <Property Name="CreditSection" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK_Courses_CreditSectionLU" FromRole="CreditSectionLookUp" ToRole="Courses" />
+        </EntityType>
+        <EntityType Name="EduBackgroundLookup">
+          <Key>
+            <PropertyRef Name="EduID" />
+          </Key>
+          <Property Name="EduID" Type="Int32" Nullable="false" />
+          <Property Name="EduBackground" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="StudentDetails" Relationship="Self.FK_StudentDetails_EduBackgroundLU" FromRole="EduBackgroundLookup" ToRole="StudentDetails" />
+        </EntityType>
+        <EntityType Name="Employer">
+          <Key>
+            <PropertyRef Name="EmployerID" />
+          </Key>
+          <Property Name="EmployerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EmploymentStatus" Relationship="Self.FK_EmploymentStatus_Employers" FromRole="Employers" ToRole="EmploymentStatus" />
+        </EntityType>
+        <EntityType Name="EmploymentStatu">
+          <Key>
+            <PropertyRef Name="EmploymentStatusID" />
+          </Key>
+          <Property Name="EmploymentStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployerID" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="JobTitleID" Type="Int32" Nullable="false" />
+          <Property Name="StatusChangedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Employer" Relationship="Self.FK_EmploymentStatus_Employers" FromRole="EmploymentStatus" ToRole="Employers" />
+          <NavigationProperty Name="EmploymentStatusLookUp" Relationship="Self.FK_EmploymentStatus_EmploymentStatusLU" FromRole="EmploymentStatus" ToRole="EmploymentStatusLookUp" />
+          <NavigationProperty Name="JobTitleLookUp" Relationship="Self.FK_EmploymentStatus_JobTitleLU" FromRole="EmploymentStatus" ToRole="JobTitleLookUp" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_EmploymentStatus_Students" FromRole="EmploymentStatus" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="EmploymentStatusLookUp">
+          <Key>
+            <PropertyRef Name="EmploymentStatusID" />
+          </Key>
+          <Property Name="EmploymentStatusID" Type="Int32" Nullable="false" />
+          <Property Name="EmploymentStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EmploymentStatus1" Relationship="Self.FK_EmploymentStatus_EmploymentStatusLU" FromRole="EmploymentStatusLookUp" ToRole="EmploymentStatus" />
+        </EntityType>
+        <EntityType Name="EnrollmentStatusLookUp">
+          <Key>
+            <PropertyRef Name="EnrollmentStatusID" />
+          </Key>
+          <Property Name="EnrollmentStatusID" Type="Int32" Nullable="false" />
+          <Property Name="EnrollmentStatus" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CourseEnrollments" Relationship="Self.FK_CourseEnrollment_EnrollmentStatusLU" FromRole="EnrollmentStatusLookUp" ToRole="CourseEnrollment" />
+        </EntityType>
+        <EntityType Name="JobTitleLookUp">
+          <Key>
+            <PropertyRef Name="JobTitleID" />
+          </Key>
+          <Property Name="JobTitleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobTitle" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EmploymentStatus" Relationship="Self.FK_EmploymentStatus_JobTitleLU" FromRole="JobTitleLookUp" ToRole="EmploymentStatus" />
+        </EntityType>
+        <EntityType Name="PreferredContactLookup">
+          <Key>
+            <PropertyRef Name="ContactTypeID" />
+          </Key>
+          <Property Name="ContactTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ContactMethod" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="StudentDetails" Relationship="Self.FK_StudentDetails_PreferredContactLU" FromRole="PreferredContactLookup" ToRole="StudentDetails" />
+        </EntityType>
+        <EntityType Name="ReferralTypeLookup">
+          <Key>
+            <PropertyRef Name="ReferralID" />
+          </Key>
+          <Property Name="ReferralID" Type="Int32" Nullable="false" />
+          <Property Name="ReferralType" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="StudentDetails" Relationship="Self.FK_StudentDetails_ReferralTypeLU" FromRole="ReferralTypeLookup" ToRole="StudentDetails" />
+        </EntityType>
+        <EntityType Name="StudentDetail">
+          <Key>
+            <PropertyRef Name="DetailID" />
+          </Key>
+          <Property Name="DetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="EduBackground" Type="Int32" Nullable="false" />
+          <Property Name="ReferralType" Type="Int32" Nullable="false" />
+          <Property Name="PreferredContactMethod" Type="Int32" Nullable="false" />
+          <Property Name="AttendedInfoSession" Type="Boolean" Nullable="false" />
+          <Property Name="RunningStartParticipant" Type="Boolean" Nullable="false" />
+          <Property Name="BAS_Status" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BAS_StatusLookup" Relationship="Self.FK_StudentDetails_BAS_StatusLU" FromRole="StudentDetails" ToRole="BAS_StatusLookup" />
+          <NavigationProperty Name="EduBackgroundLookup" Relationship="Self.FK_StudentDetails_EduBackgroundLU" FromRole="StudentDetails" ToRole="EduBackgroundLookup" />
+          <NavigationProperty Name="PreferredContactLookup" Relationship="Self.FK_StudentDetails_PreferredContactLU" FromRole="StudentDetails" ToRole="PreferredContactLookup" />
+          <NavigationProperty Name="ReferralTypeLookup" Relationship="Self.FK_StudentDetails_ReferralTypeLU" FromRole="StudentDetails" ToRole="ReferralTypeLookup" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_StudentDetails_Students" FromRole="StudentDetails" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RTCStudentID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="StudentEmail" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PersonalEmail" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="StudentDocumentsLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AttendedColleges" Relationship="Self.FK_AttendedColleges_Students" FromRole="Students" ToRole="AttendedColleges" />
+          <NavigationProperty Name="CourseEnrollments" Relationship="Self.FK_CourseEnrollment_Students" FromRole="Students" ToRole="CourseEnrollment" />
+          <NavigationProperty Name="EmploymentStatus" Relationship="Self.FK_EmploymentStatus_Students" FromRole="Students" ToRole="EmploymentStatus" />
+          <NavigationProperty Name="StudentDetails" Relationship="Self.FK_StudentDetails_Students" FromRole="Students" ToRole="StudentDetails" />
+          <NavigationProperty Name="TechInterest" Relationship="Self.FK_TechInterests_Students" FromRole="Students" ToRole="TechInterests" />
+        </EntityType>
+        <EntityType Name="TechInterest">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="DatabaseDevelopment" Type="Boolean" />
+          <Property Name="SoftwareDevelopment" Type="Boolean" />
+          <Property Name="WebDevelopment" Type="Boolean" />
+          <Property Name="MobileDevelopment" Type="Boolean" />
+          <Property Name="DatabaseAnalysis" Type="Boolean" />
+          <Property Name="SoftwareAnalysis" Type="Boolean" />
+          <Property Name="InterfaceDesign" Type="Boolean" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_TechInterests_Students" FromRole="TechInterests" ToRole="Students" />
+        </EntityType>
+        <Association Name="FK_AttendedColleges_Colleges">
+          <End Role="Colleges" Type="Self.College" Multiplicity="1" />
+          <End Role="AttendedColleges" Type="Self.AttendedCollege" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Colleges">
+              <PropertyRef Name="CollegeID" />
+            </Principal>
+            <Dependent Role="AttendedColleges">
+              <PropertyRef Name="CollegeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AttendedColleges_Students">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="AttendedColleges" Type="Self.AttendedCollege" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="AttendedColleges">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDetails_BAS_StatusLU">
+          <End Role="BAS_StatusLookup" Type="Self.BAS_StatusLookup" Multiplicity="1" />
+          <End Role="StudentDetails" Type="Self.StudentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAS_StatusLookup">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="StudentDetails">
+              <PropertyRef Name="BAS_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseEnrollment_Courses">
+          <End Role="Courses" Type="Self.Cours" Multiplicity="1" />
+          <End Role="CourseEnrollment" Type="Self.CourseEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="CourseEnrollment">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseEnrollment_EnrollmentStatusLU">
+          <End Role="EnrollmentStatusLookUp" Type="Self.EnrollmentStatusLookUp" Multiplicity="1" />
+          <End Role="CourseEnrollment" Type="Self.CourseEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnrollmentStatusLookUp">
+              <PropertyRef Name="EnrollmentStatusID" />
+            </Principal>
+            <Dependent Role="CourseEnrollment">
+              <PropertyRef Name="EnrollmentStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseEnrollment_Students">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="CourseEnrollment" Type="Self.CourseEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="CourseEnrollment">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_CourseTypeLU">
+          <End Role="CourseTypeLookUp" Type="Self.CourseTypeLookUp" Multiplicity="1" />
+          <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseTypeLookUp">
+              <PropertyRef Name="CourseTypeID" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="CourseTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Courses_CreditSectionLU">
+          <End Role="CreditSectionLookUp" Type="Self.CreditSectionLookUp" Multiplicity="1" />
+          <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CreditSectionLookUp">
+              <PropertyRef Name="CreditSectionID" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="CreditSection" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDetails_EduBackgroundLU">
+          <End Role="EduBackgroundLookup" Type="Self.EduBackgroundLookup" Multiplicity="1" />
+          <End Role="StudentDetails" Type="Self.StudentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EduBackgroundLookup">
+              <PropertyRef Name="EduID" />
+            </Principal>
+            <Dependent Role="StudentDetails">
+              <PropertyRef Name="EduBackground" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmploymentStatus_Employers">
+          <End Role="Employers" Type="Self.Employer" Multiplicity="1" />
+          <End Role="EmploymentStatus" Type="Self.EmploymentStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employers">
+              <PropertyRef Name="EmployerID" />
+            </Principal>
+            <Dependent Role="EmploymentStatus">
+              <PropertyRef Name="EmployerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmploymentStatus_EmploymentStatusLU">
+          <End Role="EmploymentStatusLookUp" Type="Self.EmploymentStatusLookUp" Multiplicity="1" />
+          <End Role="EmploymentStatus" Type="Self.EmploymentStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmploymentStatusLookUp">
+              <PropertyRef Name="EmploymentStatusID" />
+            </Principal>
+            <Dependent Role="EmploymentStatus">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmploymentStatus_JobTitleLU">
+          <End Role="JobTitleLookUp" Type="Self.JobTitleLookUp" Multiplicity="1" />
+          <End Role="EmploymentStatus" Type="Self.EmploymentStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitleLookUp">
+              <PropertyRef Name="JobTitleID" />
+            </Principal>
+            <Dependent Role="EmploymentStatus">
+              <PropertyRef Name="JobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmploymentStatus_Students">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="EmploymentStatus" Type="Self.EmploymentStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="EmploymentStatus">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDetails_PreferredContactLU">
+          <End Role="PreferredContactLookup" Type="Self.PreferredContactLookup" Multiplicity="1" />
+          <End Role="StudentDetails" Type="Self.StudentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PreferredContactLookup">
+              <PropertyRef Name="ContactTypeID" />
+            </Principal>
+            <Dependent Role="StudentDetails">
+              <PropertyRef Name="PreferredContactMethod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDetails_ReferralTypeLU">
+          <End Role="ReferralTypeLookup" Type="Self.ReferralTypeLookup" Multiplicity="1" />
+          <End Role="StudentDetails" Type="Self.StudentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReferralTypeLookup">
+              <PropertyRef Name="ReferralID" />
+            </Principal>
+            <Dependent Role="StudentDetails">
+              <PropertyRef Name="ReferralType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDetails_Students">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentDetails" Type="Self.StudentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentDetails">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TechInterests_Students">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="TechInterests" Type="Self.TechInterest" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="TechInterests">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BAS_StudentsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AttendedColleges" EntityType="Self.AttendedCollege" />
+          <EntitySet Name="BAS_StatusLookup" EntityType="Self.BAS_StatusLookup" />
+          <EntitySet Name="Colleges" EntityType="Self.College" />
+          <EntitySet Name="CourseEnrollments" EntityType="Self.CourseEnrollment" />
+          <EntitySet Name="Courses" EntityType="Self.Cours" />
+          <EntitySet Name="CourseTypeLookUps" EntityType="Self.CourseTypeLookUp" />
+          <EntitySet Name="CreditSectionLookUps" EntityType="Self.CreditSectionLookUp" />
+          <EntitySet Name="EduBackgroundLookups" EntityType="Self.EduBackgroundLookup" />
+          <EntitySet Name="Employers" EntityType="Self.Employer" />
+          <EntitySet Name="EmploymentStatus" EntityType="Self.EmploymentStatu" />
+          <EntitySet Name="EmploymentStatusLookUps" EntityType="Self.EmploymentStatusLookUp" />
+          <EntitySet Name="EnrollmentStatusLookUps" EntityType="Self.EnrollmentStatusLookUp" />
+          <EntitySet Name="JobTitleLookUps" EntityType="Self.JobTitleLookUp" />
+          <EntitySet Name="PreferredContactLookups" EntityType="Self.PreferredContactLookup" />
+          <EntitySet Name="ReferralTypeLookups" EntityType="Self.ReferralTypeLookup" />
+          <EntitySet Name="StudentDetails" EntityType="Self.StudentDetail" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="TechInterests" EntityType="Self.TechInterest" />
+          <AssociationSet Name="FK_AttendedColleges_Colleges" Association="Self.FK_AttendedColleges_Colleges">
+            <End Role="Colleges" EntitySet="Colleges" />
+            <End Role="AttendedColleges" EntitySet="AttendedColleges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AttendedColleges_Students" Association="Self.FK_AttendedColleges_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="AttendedColleges" EntitySet="AttendedColleges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDetails_BAS_StatusLU" Association="Self.FK_StudentDetails_BAS_StatusLU">
+            <End Role="BAS_StatusLookup" EntitySet="BAS_StatusLookup" />
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseEnrollment_Courses" Association="Self.FK_CourseEnrollment_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="CourseEnrollment" EntitySet="CourseEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseEnrollment_EnrollmentStatusLU" Association="Self.FK_CourseEnrollment_EnrollmentStatusLU">
+            <End Role="EnrollmentStatusLookUp" EntitySet="EnrollmentStatusLookUps" />
+            <End Role="CourseEnrollment" EntitySet="CourseEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseEnrollment_Students" Association="Self.FK_CourseEnrollment_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="CourseEnrollment" EntitySet="CourseEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_CourseTypeLU" Association="Self.FK_Courses_CourseTypeLU">
+            <End Role="CourseTypeLookUp" EntitySet="CourseTypeLookUps" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Courses_CreditSectionLU" Association="Self.FK_Courses_CreditSectionLU">
+            <End Role="CreditSectionLookUp" EntitySet="CreditSectionLookUps" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDetails_EduBackgroundLU" Association="Self.FK_StudentDetails_EduBackgroundLU">
+            <End Role="EduBackgroundLookup" EntitySet="EduBackgroundLookups" />
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmploymentStatus_Employers" Association="Self.FK_EmploymentStatus_Employers">
+            <End Role="Employers" EntitySet="Employers" />
+            <End Role="EmploymentStatus" EntitySet="EmploymentStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmploymentStatus_EmploymentStatusLU" Association="Self.FK_EmploymentStatus_EmploymentStatusLU">
+            <End Role="EmploymentStatusLookUp" EntitySet="EmploymentStatusLookUps" />
+            <End Role="EmploymentStatus" EntitySet="EmploymentStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmploymentStatus_JobTitleLU" Association="Self.FK_EmploymentStatus_JobTitleLU">
+            <End Role="JobTitleLookUp" EntitySet="JobTitleLookUps" />
+            <End Role="EmploymentStatus" EntitySet="EmploymentStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmploymentStatus_Students" Association="Self.FK_EmploymentStatus_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="EmploymentStatus" EntitySet="EmploymentStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDetails_PreferredContactLU" Association="Self.FK_StudentDetails_PreferredContactLU">
+            <End Role="PreferredContactLookup" EntitySet="PreferredContactLookups" />
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDetails_ReferralTypeLU" Association="Self.FK_StudentDetails_ReferralTypeLU">
+            <End Role="ReferralTypeLookup" EntitySet="ReferralTypeLookups" />
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDetails_Students" Association="Self.FK_StudentDetails_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TechInterests_Students" Association="Self.FK_TechInterests_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="TechInterests" EntitySet="TechInterests" />
+          </AssociationSet>
+          <FunctionImport Name="CheckForDuplicateCourseNumberOrItem">
+            <Parameter Name="CourseNumber" Mode="In" Type="String" />
+            <Parameter Name="CourseItemNumber" Mode="In" Type="String" />
+            <Parameter Name="RowCount" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteCollegeWithID">
+            <Parameter Name="CollegeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteCourseWithID">
+            <Parameter Name="CourseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteEmployerWithID">
+            <Parameter Name="EmployerID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteJobTitleWithID">
+            <Parameter Name="JobTitleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetBASGraduates" ReturnType="Collection(BAS_StudentsModel.GetBASGraduates_Result)">
+            <Parameter Name="YearStart" Mode="In" Type="Int32" />
+            <Parameter Name="YearEnd" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetLastUpdatedStudentDetails" ReturnType="Collection(BAS_StudentsModel.GetLastUpdatedStudentDetails_Result)">
+            <Parameter Name="studentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetStudentByID" ReturnType="Collection(BAS_StudentsModel.GetStudentByID_Result)">
+            <Parameter Name="studentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetStudentDetails" ReturnType="Collection(BAS_StudentsModel.GetStudentDetails_Result)">
+            <Parameter Name="StudentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetStudentEnrollmentData" ReturnType="Collection(BAS_StudentsModel.GetStudentEnrollmentData_Result)">
+            <Parameter Name="StudentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="StudentsWhoHaveCompletedClass" ReturnType="Collection(BAS_StudentsModel.StudentsWhoHaveCompletedClass_Result)">
+            <Parameter Name="courseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="StudentsWhoNeedToCompleteClass" ReturnType="Collection(BAS_StudentsModel.StudentsWhoNeedToCompleteClass_Result)">
+            <Parameter Name="courseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="StudentsWithPreReqsLeft" ReturnType="Collection(BAS_StudentsModel.StudentsWithPreReqsLeft_Result)" />
+          <FunctionImport Name="TimesEnrolledInOrCompletedCourse" ReturnType="Collection(Int32)">
+            <Parameter Name="StudentID" Mode="In" Type="Int32" />
+            <Parameter Name="CourseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetBASGraduates_Result">
+          <Property Type="Int32" Name="StudentID" Nullable="false" />
+          <Property Type="String" Name="RTCStudentID" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="StudentEmail" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PersonalEmail" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Zip" Nullable="true" MaxLength="5" />
+          <Property Type="DateTime" Name="BirthDate" Nullable="true" />
+          <Property Type="Boolean" Name="Gender" Nullable="false" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="StudentDocumentsLocation" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="GetLastUpdatedStudentDetails_Result">
+          <Property Type="Int32" Name="DetailID" Nullable="false" />
+          <Property Type="Int32" Name="StudentID" Nullable="false" />
+          <Property Type="Int32" Name="EduBackground" Nullable="false" />
+          <Property Type="Int32" Name="ReferralType" Nullable="false" />
+          <Property Type="Int32" Name="PreferredContactMethod" Nullable="false" />
+          <Property Type="Boolean" Name="AttendedInfoSession" Nullable="false" />
+          <Property Type="Boolean" Name="RunningStartParticipant" Nullable="false" />
+          <Property Type="Int32" Name="BAS_Status" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="GetStudentByID_Result">
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="25" />
+          <Property Type="DateTime" Name="BirthDate" Nullable="true" />
+          <Property Type="Boolean" Name="Gender" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Zip" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="PersonalEmail" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="StudentEmail" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="RTCStudentID" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="StudentDocumentsLocation" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="GetStudentDetails_Result">
+          <Property Type="String" Name="EduBackground" Nullable="false" MaxLength="16" />
+          <Property Type="String" Name="ReferralType" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="ContactMethod" Nullable="false" MaxLength="12" />
+          <Property Type="Boolean" Name="AttendedInfoSession" Nullable="false" />
+          <Property Type="Boolean" Name="RunningStartParticipant" Nullable="false" />
+          <Property Type="String" Name="StatusType" Nullable="false" MaxLength="15" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="false" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="GetStudentEnrollmentData_Result">
+          <Property Type="Int32" Name="EnrollmentID" Nullable="false" />
+          <Property Type="String" Name="CourseNumber" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="CompletionDate" Nullable="true" />
+          <Property Type="String" Name="CourseName" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="CourseItemNumber" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="EnrollmentStatus" Nullable="false" MaxLength="12" />
+          <Property Type="DateTime" Name="EnrollmentDate" Nullable="false" />
+          <Property Type="Boolean" Name="ConditionalAdmission" Nullable="false" />
+          <Property Type="Boolean" Name="TransferEquivalent" Nullable="false" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="StudentsWhoHaveCompletedClass_Result">
+          <Property Type="Int32" Name="StudentID" Nullable="false" />
+          <Property Type="String" Name="RTCStudentID" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="StudentEmail" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PersonalEmail" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Zip" Nullable="true" MaxLength="5" />
+          <Property Type="DateTime" Name="BirthDate" Nullable="true" />
+          <Property Type="Boolean" Name="Gender" Nullable="false" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="StudentDocumentsLocation" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="StudentsWhoNeedToCompleteClass_Result">
+          <Property Type="Int32" Name="StudentID" Nullable="false" />
+          <Property Type="String" Name="RTCStudentID" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="StudentEmail" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PersonalEmail" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Zip" Nullable="true" MaxLength="5" />
+          <Property Type="DateTime" Name="BirthDate" Nullable="true" />
+          <Property Type="Boolean" Name="Gender" Nullable="false" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="StudentDocumentsLocation" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="StudentsWithPreReqsLeft_Result">
+          <Property Type="Int32" Name="StudentID" Nullable="false" />
+          <Property Type="String" Name="RTCStudentID" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="StudentEmail" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PersonalEmail" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Zip" Nullable="true" MaxLength="5" />
+          <Property Type="DateTime" Name="BirthDate" Nullable="true" />
+          <Property Type="Boolean" Name="Gender" Nullable="false" />
+          <Property Type="String" Name="Notes" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="StudentDocumentsLocation" Nullable="true" MaxLength="255" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BAS_StudentsModelStoreContainer" CdmEntityContainer="BAS_StudentsEntities">
+          <EntitySetMapping Name="AttendedColleges">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.AttendedCollege">
+              <MappingFragment StoreEntitySet="AttendedColleges">
+                <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="CurrentlyAttending" ColumnName="CurrentlyAttending" />
+                <ScalarProperty Name="LastYearAttended" ColumnName="LastYearAttended" />
+                <ScalarProperty Name="GPA" ColumnName="GPA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BAS_StatusLookup">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.BAS_StatusLookup">
+              <MappingFragment StoreEntitySet="BAS_StatusLookup">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="StatusType" ColumnName="StatusType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Colleges">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.College">
+              <MappingFragment StoreEntitySet="Colleges">
+                <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
+                <ScalarProperty Name="CollegeName" ColumnName="CollegeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseEnrollments">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.CourseEnrollment">
+              <MappingFragment StoreEntitySet="CourseEnrollment">
+                <ScalarProperty Name="EnrollmentID" ColumnName="EnrollmentID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="EnrollmentStatus" ColumnName="EnrollmentStatus" />
+                <ScalarProperty Name="EnrollmentDate" ColumnName="EnrollmentDate" />
+                <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+                <ScalarProperty Name="ConditionalAdmission" ColumnName="ConditionalAdmission" />
+                <ScalarProperty Name="TransferEquivalent" ColumnName="TransferEquivalent" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.Cours">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="CourseNumber" ColumnName="CourseNumber" />
+                <ScalarProperty Name="CourseItemNumber" ColumnName="CourseItemNumber" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseTypeID" ColumnName="CourseTypeID" />
+                <ScalarProperty Name="CourseDescription" ColumnName="CourseDescription" />
+                <ScalarProperty Name="Credits" ColumnName="Credits" />
+                <ScalarProperty Name="RequiredForBASAdmission" ColumnName="RequiredForBASAdmission" />
+                <ScalarProperty Name="RequiredForBASCompletion" ColumnName="RequiredForBASCompletion" />
+                <ScalarProperty Name="CreditSection" ColumnName="CreditSection" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseTypeLookUps">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.CourseTypeLookUp">
+              <MappingFragment StoreEntitySet="CourseTypeLookUp">
+                <ScalarProperty Name="CourseTypeID" ColumnName="CourseTypeID" />
+                <ScalarProperty Name="CourseType" ColumnName="CourseType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CreditSectionLookUps">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.CreditSectionLookUp">
+              <MappingFragment StoreEntitySet="CreditSectionLookUp">
+                <ScalarProperty Name="CreditSectionID" ColumnName="CreditSectionID" />
+                <ScalarProperty Name="CreditSection" ColumnName="CreditSection" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EduBackgroundLookups">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.EduBackgroundLookup">
+              <MappingFragment StoreEntitySet="EduBackgroundLookup">
+                <ScalarProperty Name="EduID" ColumnName="EduID" />
+                <ScalarProperty Name="EduBackground" ColumnName="EduBackground" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employers">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.Employer">
+              <MappingFragment StoreEntitySet="Employers">
+                <ScalarProperty Name="EmployerID" ColumnName="EmployerID" />
+                <ScalarProperty Name="EmployerName" ColumnName="EmployerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmploymentStatus">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.EmploymentStatu">
+              <MappingFragment StoreEntitySet="EmploymentStatus">
+                <ScalarProperty Name="EmploymentStatusID" ColumnName="EmploymentStatusID" />
+                <ScalarProperty Name="EmployerID" ColumnName="EmployerID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+                <ScalarProperty Name="StatusChangedDate" ColumnName="StatusChangedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmploymentStatusLookUps">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.EmploymentStatusLookUp">
+              <MappingFragment StoreEntitySet="EmploymentStatusLookUp">
+                <ScalarProperty Name="EmploymentStatusID" ColumnName="EmploymentStatusID" />
+                <ScalarProperty Name="EmploymentStatus" ColumnName="EmploymentStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EnrollmentStatusLookUps">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.EnrollmentStatusLookUp">
+              <MappingFragment StoreEntitySet="EnrollmentStatusLookUp">
+                <ScalarProperty Name="EnrollmentStatusID" ColumnName="EnrollmentStatusID" />
+                <ScalarProperty Name="EnrollmentStatus" ColumnName="EnrollmentStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobTitleLookUps">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.JobTitleLookUp">
+              <MappingFragment StoreEntitySet="JobTitleLookUp">
+                <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PreferredContactLookups">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.PreferredContactLookup">
+              <MappingFragment StoreEntitySet="PreferredContactLookup">
+                <ScalarProperty Name="ContactTypeID" ColumnName="ContactTypeID" />
+                <ScalarProperty Name="ContactMethod" ColumnName="ContactMethod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReferralTypeLookups">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.ReferralTypeLookup">
+              <MappingFragment StoreEntitySet="ReferralTypeLookup">
+                <ScalarProperty Name="ReferralID" ColumnName="ReferralID" />
+                <ScalarProperty Name="ReferralType" ColumnName="ReferralType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentDetails">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.StudentDetail">
+              <MappingFragment StoreEntitySet="StudentDetails">
+                <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="EduBackground" ColumnName="EduBackground" />
+                <ScalarProperty Name="ReferralType" ColumnName="ReferralType" />
+                <ScalarProperty Name="PreferredContactMethod" ColumnName="PreferredContactMethod" />
+                <ScalarProperty Name="AttendedInfoSession" ColumnName="AttendedInfoSession" />
+                <ScalarProperty Name="RunningStartParticipant" ColumnName="RunningStartParticipant" />
+                <ScalarProperty Name="BAS_Status" ColumnName="BAS_Status" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="RTCStudentID" ColumnName="RTCStudentID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="StudentEmail" ColumnName="StudentEmail" />
+                <ScalarProperty Name="PersonalEmail" ColumnName="PersonalEmail" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="StudentDocumentsLocation" ColumnName="StudentDocumentsLocation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TechInterests">
+            <EntityTypeMapping TypeName="BAS_StudentsModel.TechInterest">
+              <MappingFragment StoreEntitySet="TechInterests">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="DatabaseDevelopment" ColumnName="DatabaseDevelopment" />
+                <ScalarProperty Name="SoftwareDevelopment" ColumnName="SoftwareDevelopment" />
+                <ScalarProperty Name="WebDevelopment" ColumnName="WebDevelopment" />
+                <ScalarProperty Name="MobileDevelopment" ColumnName="MobileDevelopment" />
+                <ScalarProperty Name="DatabaseAnalysis" ColumnName="DatabaseAnalysis" />
+                <ScalarProperty Name="SoftwareAnalysis" ColumnName="SoftwareAnalysis" />
+                <ScalarProperty Name="InterfaceDesign" ColumnName="InterfaceDesign" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CheckForDuplicateCourseNumberOrItem" FunctionName="BAS_StudentsModel.Store.CheckForDuplicateCourseNumberOrItem" />
+          <FunctionImportMapping FunctionImportName="DeleteCollegeWithID" FunctionName="BAS_StudentsModel.Store.DeleteCollegeWithID" />
+          <FunctionImportMapping FunctionImportName="DeleteCourseWithID" FunctionName="BAS_StudentsModel.Store.DeleteCourseWithID" />
+          <FunctionImportMapping FunctionImportName="DeleteEmployerWithID" FunctionName="BAS_StudentsModel.Store.DeleteEmployerWithID" />
+          <FunctionImportMapping FunctionImportName="DeleteJobTitleWithID" FunctionName="BAS_StudentsModel.Store.DeleteJobTitleWithID" />
+          <FunctionImportMapping FunctionImportName="GetBASGraduates" FunctionName="BAS_StudentsModel.Store.GetBASGraduates">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BAS_StudentsModel.GetBASGraduates_Result">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="RTCStudentID" ColumnName="RTCStudentID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="StudentEmail" ColumnName="StudentEmail" />
+                <ScalarProperty Name="PersonalEmail" ColumnName="PersonalEmail" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="StudentDocumentsLocation" ColumnName="StudentDocumentsLocation" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLastUpdatedStudentDetails" FunctionName="BAS_StudentsModel.Store.GetLastUpdatedStudentDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BAS_StudentsModel.GetLastUpdatedStudentDetails_Result">
+                <ScalarProperty Name="DetailID" ColumnName="DetailID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="EduBackground" ColumnName="EduBackground" />
+                <ScalarProperty Name="ReferralType" ColumnName="ReferralType" />
+                <ScalarProperty Name="PreferredContactMethod" ColumnName="PreferredContactMethod" />
+                <ScalarProperty Name="AttendedInfoSession" ColumnName="AttendedInfoSession" />
+                <ScalarProperty Name="RunningStartParticipant" ColumnName="RunningStartParticipant" />
+                <ScalarProperty Name="BAS_Status" ColumnName="BAS_Status" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStudentByID" FunctionName="BAS_StudentsModel.Store.GetStudentByID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BAS_StudentsModel.GetStudentByID_Result">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="PersonalEmail" ColumnName="PersonalEmail" />
+                <ScalarProperty Name="StudentEmail" ColumnName="StudentEmail" />
+                <ScalarProperty Name="RTCStudentID" ColumnName="RTCStudentID" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="StudentDocumentsLocation" ColumnName="StudentDocumentsLocation" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStudentDetails" FunctionName="BAS_StudentsModel.Store.GetStudentDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BAS_StudentsModel.GetStudentDetails_Result">
+                <ScalarProperty Name="EduBackground" ColumnName="EduBackground" />
+                <ScalarProperty Name="ReferralType" ColumnName="ReferralType" />
+                <ScalarProperty Name="ContactMethod" ColumnName="ContactMethod" />
+                <ScalarProperty Name="AttendedInfoSession" ColumnName="AttendedInfoSession" />
+                <ScalarProperty Name="RunningStartParticipant" ColumnName="RunningStartParticipant" />
+                <ScalarProperty Name="StatusType" ColumnName="StatusType" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetStudentEnrollmentData" FunctionName="BAS_StudentsModel.Store.GetStudentEnrollmentData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BAS_StudentsModel.GetStudentEnrollmentData_Result">
+                <ScalarProperty Name="EnrollmentID" ColumnName="EnrollmentID" />
+                <ScalarProperty Name="CourseNumber" ColumnName="CourseNumber" />
+                <ScalarProperty Name="CompletionDate" ColumnName="CompletionDate" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseItemNumber" ColumnName="CourseItemNumber" />
+                <ScalarProperty Name="EnrollmentStatus" ColumnName="EnrollmentStatus" />
+                <ScalarProperty Name="EnrollmentDate" ColumnName="EnrollmentDate" />
+                <ScalarProperty Name="ConditionalAdmission" ColumnName="ConditionalAdmission" />
+                <ScalarProperty Name="TransferEquivalent" ColumnName="TransferEquivalent" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="StudentsWhoHaveCompletedClass" FunctionName="BAS_StudentsModel.Store.StudentsWhoHaveCompletedClass">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BAS_StudentsModel.StudentsWhoHaveCompletedClass_Result">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="RTCStudentID" ColumnName="RTCStudentID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="StudentEmail" ColumnName="StudentEmail" />
+                <ScalarProperty Name="PersonalEmail" ColumnName="PersonalEmail" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="StudentDocumentsLocation" ColumnName="StudentDocumentsLocation" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="StudentsWhoNeedToCompleteClass" FunctionName="BAS_StudentsModel.Store.StudentsWhoNeedToCompleteClass">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BAS_StudentsModel.StudentsWhoNeedToCompleteClass_Result">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="RTCStudentID" ColumnName="RTCStudentID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="StudentEmail" ColumnName="StudentEmail" />
+                <ScalarProperty Name="PersonalEmail" ColumnName="PersonalEmail" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="StudentDocumentsLocation" ColumnName="StudentDocumentsLocation" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="StudentsWithPreReqsLeft" FunctionName="BAS_StudentsModel.Store.StudentsWithPreReqsLeft">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BAS_StudentsModel.StudentsWithPreReqsLeft_Result">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="RTCStudentID" ColumnName="RTCStudentID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="StudentEmail" ColumnName="StudentEmail" />
+                <ScalarProperty Name="PersonalEmail" ColumnName="PersonalEmail" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="StudentDocumentsLocation" ColumnName="StudentDocumentsLocation" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TimesEnrolledInOrCompletedCourse" FunctionName="BAS_StudentsModel.Store.TimesEnrolledInOrCompletedCourse" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

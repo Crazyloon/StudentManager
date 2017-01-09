@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e44df0a2539d415686055bbe23a27ef5" Name="Diagram1">
+        <EntityTypeShape EntityType="BAS_StudentsModel.AttendedCollege" Width="1.625" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.BAS_StatusLookup" Width="1.75" PointX="0.5" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.College" Width="1.5" PointX="0.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.CourseEnrollment" Width="1.875" PointX="6" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.Cours" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.CourseTypeLookUp" Width="2.375" PointX="0.625" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.CreditSectionLookUp" Width="1.875" PointX="1.125" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.EduBackgroundLookup" Width="2.125" PointX="0.5" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.Employer" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.EmploymentStatu" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.EmploymentStatusLookUp" Width="2.125" PointX="0.5" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.EnrollmentStatusLookUp" Width="2.125" PointX="5.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.JobTitleLookUp" Width="1.5" PointX="0.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.PreferredContactLookup" Width="2" PointX="0.5" PointY="30" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.ReferralTypeLookup" Width="1.875" PointX="0.5" PointY="32.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.StudentDetail" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.Student" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BAS_StudentsModel.TechInterest" Width="1.5" PointX="3" PointY="26.875" IsExpanded="true" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_AttendedColleges_Colleges" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_AttendedColleges_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_StudentDetails_BAS_StatusLU" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_CourseEnrollment_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_CourseEnrollment_EnrollmentStatusLU" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_CourseEnrollment_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_Courses_CourseTypeLU" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_Courses_CreditSectionLU" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_StudentDetails_EduBackgroundLU" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_EmploymentStatus_Employers" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_EmploymentStatus_EmploymentStatusLU" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_EmploymentStatus_JobTitleLU" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_EmploymentStatus_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_StudentDetails_PreferredContactLU" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_StudentDetails_ReferralTypeLU" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_StudentDetails_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="BAS_StudentsModel.FK_TechInterests_Students" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
