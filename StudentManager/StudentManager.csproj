@@ -231,6 +231,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DatabaseSeed\BAS_StudentsSampleQueries.sql" />
+    <Content Include="DatabaseSeed\CompletedCoursesQueries.sql" />
+    <Content Include="DatabaseSeed\CreateBAS_Students.sql" />
+    <Content Include="DatabaseSeed\CreateDatabaseBAS_Students.sql" />
+    <Content Include="DatabaseSeed\CreateStoredProcBAS_Students.sql" />
+    <Content Include="DatabaseSeed\CreateTablesBAS_Students.sql" />
+    <Content Include="DatabaseSeed\InsertStudentData.sql" />
+    <Content Include="DatabaseSeed\TestQueriesForStoredProcedures.sql" />
+    <Content Include="DatabaseSeed\Triggers_BAS_Students.sql" />
     <Content Include="Resources\favicon.ico" />
     <None Include="Resources\MainMenuQuickAdd.png" />
     <Content Include="Resources\sManagerIcon.jpg" />
